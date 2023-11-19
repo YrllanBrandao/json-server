@@ -11,6 +11,6 @@ class IndexController extends Action
     }
     public function notFound()
     {
-        $this -> render("")
+        $this->render("notFound");
     }
 }
