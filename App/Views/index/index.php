@@ -13,8 +13,8 @@
     <div class="container-fluid">
         <h1>Json server</h1>
 
-        <form action="" class="form-control" id="form-json" onsubmit='validateJson()'>
-            <textarea name="" id="jsonInput" cols="30" rows="10">
+        <form action="/save-json" class="form-control" id="form-json" method="POST">
+            <textarea name="jsonValue" id="jsonInput" cols="30" rows="10">
         </textarea>
 
             <button type="submit" class="btn btn-primary">
