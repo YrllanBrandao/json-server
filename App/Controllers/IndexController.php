@@ -3,7 +3,7 @@
     
     use MF\Controller\Action;
 
-class indexController extends Action{
+class IndexController extends Action{
         function index(){
             $this -> render("index");
         }
