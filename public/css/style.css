@@ -1,0 +1,40 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container-fluid {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #f8f9fa;
+}
+
+#form-json{
+    padding: 1em;
+    border: none;
+}
+@media screen and (max-width: 768px){
+    #form-json{
+        width: 80vw;
+    }
+}
+@media screen and (min-width: 769px){
+    #form-json{
+        width: 40vw;
+    }
+}
+
+.hidden{
+    display: none;
+}

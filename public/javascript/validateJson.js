@@ -1,21 +1,26 @@
+import { handler } from "./handler.js";
 const jsonTextArea = document.getElementById("jsonInput");
 const formJson = document.getElementById("form-json");
-
-
-formJson.addEventListener('submit', (e) => {
+const resultArea = document.getElementById("result-area");
+const result = document.getElementById("result");
+formJson.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const isValid = validateJson();
 
     if (isValid) {
-        formJson.submit();
+        const jsonValue = jsonTextArea.value;
+        const res = await handler(jsonValue);
+        result.value = res.generated_url;
+        resultArea.classList.remove('hidden');
     }
     else {
-        alert("não válido")
+        alert("not valid json")
     }
 })
 
 function validateJson() {
+
     const jsonValue = jsonTextArea.value;
 
     try {
@@ -28,6 +33,7 @@ function validateJson() {
         return true;
     }
     catch (error) {
+        console.error(error);
         return false;
 
     }
