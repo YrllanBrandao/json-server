@@ -10,27 +10,48 @@ class JsonModel
     function saveJson($json)
     {
         try {
-
-            $fakeJson = [['name' => 'teste1']];
-
-            $fakeJsonEncoded = json_encode($fakeJson);
+            $jsonEncoded = json_encode($json);
             $sql = "
                 INSERT INTO registers(json) VALUES (:json)
                 ";
 
             $conn = new Connection;
-            $connection = $conn -> getConnection();
+            $connection = $conn->getConnection();
             $statement = $connection->prepare($sql);
 
-            $statement->bindParam(':json', $fakeJsonEncoded);
+            $statement->bindParam(':json', $jsonEncoded);
 
             $statement->execute();
 
-            echo 'tudo certo aqui';
             http_response_code(201);
 
         } catch (PDOException $error) {
             echo 'An error has ocurred during the DB; Connection!';
         }
     }
+    
+    function generatePath()
+    {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyz';
+        $numbers = '0123456789';
+        $path = '';
+        for ($i = 0; $i < 6; $i++) {
+            $randomCharacter = rand(0, 1);
+
+            switch ($randomCharacter) {
+                case 0:
+                    $indexAlphabet = rand(0, 25);
+                    $path .= $alphabet[$indexAlphabet];
+
+                    break;
+                case 1:
+                    $indexNumbers = rand(0, 9);
+                    $path .= $numbers[$indexNumbers];
+                    break;
+            }
+        }
+
+        return $path;
+    }
+
 }
