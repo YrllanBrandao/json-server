@@ -25,7 +25,6 @@ class JsonModel
 
             $statement->execute();
 
-            
             http_response_code(201);
 
         } catch (PDOException $error) {
@@ -55,15 +54,15 @@ class JsonModel
         $numbers = '0123456789';
         $path = '';
         $pathExists;
-        do{
+        do {
             for ($i = 0; $i < 6; $i++) {
                 $randomCharacter = rand(0, 1);
-    
+
                 switch ($randomCharacter) {
                     case 0:
                         $indexAlphabet = rand(0, 25);
                         $path .= $alphabet[$indexAlphabet];
-    
+
                         break;
                     case 1:
                         $indexNumbers = rand(0, 9);
@@ -71,11 +70,30 @@ class JsonModel
                         break;
                 }
             }
-            
-            $pathExists = $this -> verifyIfPathExists($path);
-        }while($pathExists);
-        
+
+            $pathExists = $this->verifyIfPathExists($path);
+        } while ($pathExists);
+
         return $path;
     }
+    public function getSavedPaths()
+    {
+        $sql = '
+        SELECT path FROM registers
+        ';
+        $conn = new Connection;
+        $connection = $conn->getConnection();
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $queryResult = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+        if (empty($result)) {
+            return [
+                'route' => '/404',
+                'controller' => 'indexController',
+                'action' => 'notFound',
+            ];
+        }
+        return $result;
+    }
 }
