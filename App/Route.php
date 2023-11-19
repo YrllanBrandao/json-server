@@ -2,17 +2,37 @@
 
 namespace App;
 
+use App\Routes\IndexRoute;
 use MF\Init\Bootstrap;
 
 class Route extends Bootstrap
 {
+    private function mergeRoutes()
+    {
+        $args = func_get_args();
+
+        $allArguments = [];
+
+        foreach ($args as $arg) {
+            $allArguments += $arg;
+        }
+        return $allArguments;
+    }
     public function initRoutes()
     {
+        $indexRoute = new IndexRoute;
+
+        $indexRoutes = $indexRoute->getRoutes();
+
         $routes['index'] = [
             'route' => '/',
-            'controller' => 'indexController',
-            'action' => 'index'
+            'controller' => 'IndexController',
+            'action' => 'index',
         ];
-        $this->setRoutes($routes);
+
+       
+        $AllRoutes = $this -> mergeRoutes($indexRoutes, $routes);
+    
+        $this->setRoutes($AllRoutes);
     }
 }
