@@ -97,4 +97,33 @@ class JsonModel
 
         return $queryResult;
     }
+
+    public function getJson($path)
+    {
+        $sql = 'SELECT json FROM registers WHERE path = :path';
+        $conn = new Connection;
+        $connection = $conn->getConnection();
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':path', $path);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result !== false && isset($result['json'])) {
+            $jsonEncoded = $result['json'];
+
+            $data = json_decode($jsonEncoded, true);
+
+            if ($data !== null) {
+                header("Content-type: Application/json");
+                http_response_code(200);
+                echo $data;
+            } else {
+                echo "Erro na decodificação do JSON.";
+            }
+        } else {
+            echo "Registro não encontrado.";
+        }
+    }
+
 }
