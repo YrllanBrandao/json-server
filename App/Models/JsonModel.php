@@ -87,13 +87,14 @@ class JsonModel
         $statement->execute();
         $queryResult = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        if (empty($result)) {
+        if (empty($queryResult)) {
             return [
                 'route' => '/404',
                 'controller' => 'indexController',
                 'action' => 'notFound',
             ];
         }
-        return $result;
+
+        return $queryResult;
     }
 }
