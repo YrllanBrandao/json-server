@@ -12,7 +12,11 @@ class JsonController extends Action
     {
 
         $jsonModel = new JsonModel;
-        $jsonReceived = $_POST['jsonValue'];
+        
+        $json_data = file_get_contents('php://input');
+        $data = json_decode($json_data, true);
+        $jsonReceived = $data['jsonValue'];
+
         $jsonModel->saveJson($jsonReceived);
     }
     public function showJson($path)
