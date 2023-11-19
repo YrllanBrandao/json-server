@@ -1,10 +1,16 @@
 <?php
-    namespace App\Controllers;
-    
-    use MF\Controller\Action;
+namespace App\Controllers;
 
-class IndexController extends Action{
-        function index(){
-            $this -> render("index");
-        }
+use MF\Controller\Action;
+
+class IndexController extends Action
+{
+    public function index()
+    {
+        $this->render("index");
+    }
+    public function notFound()
+    {
+        $this -> render("")
+    }
 }
