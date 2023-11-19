@@ -1,0 +1,5 @@
+@HOSTSERVER=http://localhost:8080
+
+
+POST {{HOSTSERVER}}/save-json HTTP/1.1
+Content-Type: application/json
