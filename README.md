@@ -1,7 +1,7 @@
 # json-server
 ### DISCLAMER 
 
-O projeto ainda não está "finalizo", então pode apresentar bugs, caso encontre alguma falha, não hesite em abrir uma [ISSUE AQUI](https://github.com/YrllanBrandao/json-server/issues)
+O projeto ainda não está "finalizado", então pode apresentar bugs, caso encontre alguma falha, não hesite em abrir uma [ISSUE AQUI](https://github.com/YrllanBrandao/json-server/issues)
 
 <HR>
 
