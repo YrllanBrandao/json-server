@@ -8,7 +8,7 @@ formJson.addEventListener('submit', (e) => {
     const isValid = validateJson();
 
     if (isValid) {
-        alert("Válido")
+        formJson.submit();
     }
     else {
         alert("não válido")
