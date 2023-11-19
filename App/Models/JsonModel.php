@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Database\Connection;
 use \PDO;
 use \PDO\PDOException;
+use \Dotenv\Dotenv;
 
 class JsonModel
 {
@@ -11,6 +12,11 @@ class JsonModel
     function saveJson($json)
     {
         try {
+            $dotenv_path = dirname(dirname(__DIR__));
+            $dotenv = Dotenv::createImmutable($dotenv_path);
+            
+            $dotenv -> load();
+            
             $jsonEncoded = json_encode($json);
             $sql = "
                 INSERT INTO registers(json, path) VALUES (:json, :path)
@@ -25,7 +31,13 @@ class JsonModel
 
             $statement->execute();
 
+            $generatedUrl = $_ENV['HOST']  . $generatedPath;
+            $response = ['generated_url' => $generatedUrl];
+            
             http_response_code(201);
+            header('Content-Type: application/json');
+            
+            echo json_encode($response);
 
         } catch (PDOException $error) {
             echo 'An error has ocurred during the DB; Connection!';
